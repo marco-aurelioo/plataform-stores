@@ -8,19 +8,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// "Person type" (tipo um objeto)
-type UserRegister struct {
-	ID       string "json:id"
-	Email    string "json:email"
-	Password string "json:password"
-}
-
-type Session struct {
-	ID    string "json:id"
-	State string "json:state"
-	Rules string "json:rules"
-}
-
 var sessions []Session
 
 // GetPerson mostra apenas um contato
@@ -57,6 +44,21 @@ func DeleteSession(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func CreateUser(w http.ResponseWriter, r *http.Request) {
+
+	//b := []byte(`{"Name":"Bob","Food":"Pickle"}`)
+	//var m Message
+	//err := json.Unmarshal(b, &m)
+
+	params := mux.Vars(r)
+	var session Session
+	_ = json.NewDecoder(r.Body).Decode(&session)
+	session.ID = params["id"]
+	sessions = append(sessions, session)
+	json.NewEncoder(w).Encode(session)
+
+}
+
 // função principal para executar a api
 func main() {
 	router := mux.NewRouter()
@@ -65,6 +67,7 @@ func main() {
 	router.HandleFunc("/session/{sessionid}", GetSession).Methods("GET")
 	router.HandleFunc("/session/{sessionid}", DeleteSession).Methods("DELETE")
 	router.HandleFunc("/auth", CreateSession).Methods("POST")
+	router.HandleFunc("/user", CreateUser).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8001", router))
 }
