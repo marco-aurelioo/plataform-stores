@@ -1,5 +1,5 @@
 #run msql docker 
-docker run --rm -dit -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass --name plataform-mysql mysql:5.7
+docker run --rm -dit -v /opt/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass --name plataform-mysql mysql:5.7
 
 Compose docker mysql:
 

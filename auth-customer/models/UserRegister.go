@@ -2,7 +2,7 @@ package models
 
 //UserRegister using to create and autheticate on plataform
 type UserRegister struct {
-	ID       string
+	ID       int64
 	Email    string
 	Password string
 	Name     string
