@@ -3,7 +3,18 @@ Integration services for optin optout
 rule of comunications
 Transactionals emails
 
+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 
+
 clients - 
 1 - auth-customer
-templates : wellcome, forgot-password, alter-password
 
+Depends
+"github.com/google/uuid"
+"github.com/gorilla/mux"
+"github.com/sendgrid/sendgrid-go"
+"github.com/sendgrid/sendgrid-go/helpers/mail"
+
+#Docker build and run
+go build
+docker build -t message-b2c .
+docker run -it --rm -p 8002:8002 --name messages-b2c messages-b2c

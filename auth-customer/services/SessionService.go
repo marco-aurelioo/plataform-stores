@@ -16,7 +16,6 @@ var ipOldError = make(map[string]time.Time)
 
 //CreateNewSession create new session from a correct email and password
 func CreateNewSession(email string, password string, userAgentName string, ip string) (models.Session, error) {
-
 	var (
 		session models.Session
 		err     error
@@ -38,6 +37,11 @@ func CreateNewSession(email string, password string, userAgentName string, ip st
 	}
 	return session, err
 
+}
+
+func ValidateSession(sessionKey string) (models.Session, error) {
+	session, err := database.FindSession(sessionKey)
+	return session, err
 }
 
 func registrerSession(session models.Session, userID int64, userAgentName string, ip string) {

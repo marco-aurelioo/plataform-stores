@@ -12,15 +12,19 @@ import (
 
 var sessions []models.Session
 
-// GetPerson mostra apenas um contato
+// GetSession find active session for keySession
 func GetSession(w http.ResponseWriter, r *http.Request) {
-
-	for _, item := range sessions {
-		json.NewEncoder(w).Encode(item)
-		return
-
+	vars := mux.Vars(r)
+	key := vars["sessionid"]
+	session, err := services.ValidateSession(key)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(session)
 	}
-	json.NewEncoder(w).Encode(&models.Session{})
+
 }
 
 // CreateSession
