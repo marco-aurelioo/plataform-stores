@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"plataform-stores/auth-customer/database"
 	"plataform-stores/auth-customer/models"
 	"time"
 
@@ -29,18 +30,18 @@ func CreateNewSession(email string, password string, userAgentName string, ip st
 		} else {
 			log.Print("criando sessao service")
 			session = createSessionFromUser(user)
-			registrerSession(session, userAgentName, ip)
+			registrerSession(session, user.ID, userAgentName, ip)
 			err = nil
 		}
 	} else {
-		err = errors.New("Ip bloqueado temporariamente")
+		err = errors.New("Tentativa de acesso bloqueado temporariamente")
 	}
 	return session, err
 
 }
 
-func registrerSession(session models.Session, userAgentName string, ip string) {
-
+func registrerSession(session models.Session, userID int64, userAgentName string, ip string) {
+	database.CreateSession(session.ID.String(), session.State, userID, ip, userAgentName)
 }
 
 //okAccessToIp validate number of failed access
