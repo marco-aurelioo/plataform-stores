@@ -8,6 +8,7 @@ import (
 	"log"
 	"plataform-stores/auth-customer/database"
 	"plataform-stores/auth-customer/models"
+	"regexp"
 )
 
 const chave = "ChaveDeSeguranca"
@@ -21,6 +22,10 @@ func CreateUser(newUser models.UserRegister) (models.UserRegister, error) {
 	var (
 		user models.UserRegister
 	)
+	if !validateEmail(newUser.Email) {
+		err := errors.New("Email invalido.")
+		return user, err
+	}
 	userExiste, err := database.FindUserByEmail(newUser.Email)
 	if err != nil {
 		//encriptando senha
@@ -31,8 +36,7 @@ func CreateUser(newUser models.UserRegister) (models.UserRegister, error) {
 		//incluindo novo usuario
 		user, err = database.CreateNewUser(newUser)
 		if err == nil {
-			log.Print("encriptou a senha " + newUser.Password)
-			err = nil
+			SendWellCome(user)
 		}
 		user.Password = ""
 	} else {
@@ -52,6 +56,12 @@ func FindUserByEmailAndPassWord(email string, password string) (models.UserRegis
 		err = errors.New("Falha buscando usuario")
 	}
 	return user, err
+}
+
+var re = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+
+func validateEmail(email string) bool {
+	return re.MatchString(email)
 }
 
 func encodeBase64(b []byte) string {
