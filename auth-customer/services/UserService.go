@@ -29,18 +29,19 @@ func CreateUser(newUser models.UserRegister) (models.UserRegister, error) {
 	userExiste, err := database.FindUserByEmail(newUser.Email)
 	if err != nil {
 		//encriptando senha
-		log.Print("não encontrou")
 		encriptPass := encrypt(chave, newUser.Password)
 		newUser.Password = string(encriptPass)
 
 		//incluindo novo usuario
 		user, err = database.CreateNewUser(newUser)
 		if err == nil {
-			SendWellCome(user)
+			errSend := SendWellCome(user)
+			if errSend != nil {
+				log.Print("erro ao enviar o email de boas vindas, criar processo para tentar enviar depois!")
+			}
 		}
 		user.Password = ""
 	} else {
-		log.Print("encontrou")
 		err = errors.New("Usuario ja cadastrado")
 		userExiste.Password = ""
 		user = userExiste

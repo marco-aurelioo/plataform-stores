@@ -17,4 +17,4 @@ Depends
 #Docker build and run
 go build
 docker build -t message-b2c .
-docker run -it --rm -p 8002:8002 --name messages-b2c messages-b2c
+docker run -dit --rm -p 8002:8002 --name messages-b2c messages-b2c
