@@ -1,0 +1,10 @@
+body {
+display: flex;
+height: 100ch;
+justify-content: center;
+align-items: center;
+text-align: center;
+color:#FFF;
+background: linear-gradient(rgb(83,105,118),rgb(141,45,73));
+
+}

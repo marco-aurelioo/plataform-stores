@@ -1,7 +1,16 @@
-import reactDOM from 'react-dom'
-import react from 'react'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
+import "./index.css" 
+
+import Calculator from "./modules/main/Calculator/Calculator"
+ 
 const rootElemet = document.getElementById("root")
- reactDOM.render("Ola ecommerce",rootElemet)
+
+ReactDOM.render(
+       <div>
+          <Calculator /> 
+      </div>
+    ,rootElemet)
  
 
