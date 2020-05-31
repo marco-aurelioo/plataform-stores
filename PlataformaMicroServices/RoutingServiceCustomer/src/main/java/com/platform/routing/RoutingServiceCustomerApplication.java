@@ -14,7 +14,6 @@ public class RoutingServiceCustomerApplication {
 	public static void main(String[] args) {
 
 		new SpringApplicationBuilder(RoutingServiceCustomerApplication.class)
-				//.web(WebApplicationType.REACTIVE)
 				.run(args);
 	}
 

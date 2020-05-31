@@ -1,13 +1,31 @@
 server:
     port: 8762
+    http2:
+        enabled: true
+    compression:
+        enabled: true
+        
 spring:
     application:
-        name: zuul-server
+        name: router
+    cloud:
+        config:
+            discovery:
+                enabled: true
+            
+    profiles:
+        active: dev
+
 eureka:
     instance:
         preferIpAddress: true
+        metadataMap:
+            user: root
+            password: s3cr3t
+            configPath: /
     client:
         registerWithEureka: true
         fetchRegistry: true
         serviceUrl:
             defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
