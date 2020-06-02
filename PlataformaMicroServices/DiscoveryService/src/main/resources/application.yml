@@ -15,7 +15,7 @@ spring:
   #Eureka Specifics
 eureka:
     instance:
-        hostname: localhost
+        hostname: discoveryservice
     client:
         registerWithEureka: false
         fetchRegistry: false

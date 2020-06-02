@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.platform</groupId>
-	<artifactId>RoutingServiceCustomer</artifactId>
+	<artifactId>RoutingService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RoutingServiceCustomer</name>
+	<name>RoutingService</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -62,7 +62,7 @@
 	</dependencyManagement>
 
 	<build>
-	   	<finalName>RoutingServiceCustomer</finalName>
+	   	<finalName>RoutingService</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
