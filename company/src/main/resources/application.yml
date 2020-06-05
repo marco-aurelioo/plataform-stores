@@ -32,14 +32,14 @@ spring:
     h2:
         console:
             enabled: true
-eureka:
-    instance:
-        preferIpAddress: true
-    client:
-        registerWithEureka: true
-        fetchRegistry: true
-        serviceUrl:
-            defaultZone: ${EUREKA_URI:http://discoveryservice:8761/eureka}
+#eureka:
+#    instance:
+#        preferIpAddress: true
+#    client:
+#        registerWithEureka: true
+#        fetchRegistry: true
+#        serviceUrl:
+#            defaultZone: ${EUREKA_URI:http://discoveryservice:8761/eureka}
 
 
 
