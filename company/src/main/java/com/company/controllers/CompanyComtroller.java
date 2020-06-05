@@ -21,18 +21,18 @@ public class CompanyComtroller {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteCompany(@PathVariable("id") String id){
-
         return new ResponseEntity<Boolean>(companyBusiness.delete(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public String createCompany(){
-        return "created";
+    public ResponseEntity<Company> createCompany(@RequestBody Company company ){
+        return new ResponseEntity<Company>(companyBusiness.createCompany(company),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public String updateCompany(@PathVariable("id") String id){
-        return id;
+    public ResponseEntity<Company> updateCompany(@RequestBody Company company,
+                                                 @PathVariable("id") String id){
+        return new ResponseEntity<Company>(companyBusiness.updateCompany(company,id),HttpStatus.OK);
     }
 
 }

@@ -19,8 +19,6 @@ INSERT INTO COMPANY (id, user_owner, name, document) VALUES
 ('dca57f7d-944b-49f0-aaa3-185abb5dc4bf','0635c81f-3e75-4e0f-a248-a919e9f0dde0','company fred 1','documento 1'),
 ('63809460-01d7-4fa8-af23-fd296aa5abd5','0635c81f-3e75-4e0f-a248-a919e9f0dde0','company fred 2','documento 2');
 
-
-
 INSERT INTO STORE (id, name, company_id, document) VALUES
 ('12bccedb-e862-4181-b399-362bd4958073','A','dca57f7d-944b-49f0-aaa3-185abb5dc4bf','docA'),
 ('680692d0-923d-4c08-907b-35b04e9b35d1','B','dca57f7d-944b-49f0-aaa3-185abb5dc4bf','docB'),

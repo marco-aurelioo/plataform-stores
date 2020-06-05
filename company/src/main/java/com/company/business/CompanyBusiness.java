@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +29,26 @@ public class CompanyBusiness {
         return company;
     }
 
+    public Company createCompany(Company company) {
+        CompanyEntity entity = fromPojo(company);
+        entity = companyCRUDRepository.save(entity);
+        Company createdCompany = fromEntity(entity);
+        return createdCompany;
+    }
+
+    public Company updateCompany(Company company, String uuid) {
+        CompanyEntity entity = findCompanyEntity(uuid);
+        if(entity.getId().equals(company.getId())){
+            CompanyEntity entityFromPojo = fromPojo(company);
+            BeanUtils.copyProperties(entityFromPojo,entity);
+            entity = companyCRUDRepository.save(entity);
+            Company companyUpdated = fromEntity(entity);
+            return companyUpdated;
+        }else{
+            throw new RuntimeException("Invalid company to update");
+        }
+    }
+
     protected CompanyEntity findCompanyEntity(String uuid){
         UUID id = UUID.fromString(uuid);
         Optional<CompanyEntity> optionalCompanyEntity = companyCRUDRepository.findById(id);
@@ -44,11 +65,10 @@ public class CompanyBusiness {
         return company;
     }
 
-    /***
-     * create
-     * read
-     * update
-     * delete
-     */
+    private CompanyEntity fromPojo(Company company) {
+        CompanyEntity entity =  new CompanyEntity();
+        BeanUtils.copyProperties(company,entity);
+        return entity;
+    }
 
 }
