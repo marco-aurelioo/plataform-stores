@@ -15,7 +15,7 @@ public class ProductController {
     private ProductBusiness productBusiness;
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") Long productid){
+    public ResponseEntity<Product> getProduct(@PathVariable("id") long productid){
         return new ResponseEntity<Product>(productBusiness.getProduct(productid), HttpStatus.OK);
     }
 
@@ -25,13 +25,13 @@ public class ProductController {
     }
 
     @PutMapping(value="{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long productid,
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") long productid,
                                                  @RequestBody Product product){
         return new ResponseEntity<Product>(productBusiness.updateProduct(productid,product), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Boolean> deleteProduct(@PathVariable Long productid){
+    public ResponseEntity<Boolean> deleteProduct(@PathVariable long productid){
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 }
