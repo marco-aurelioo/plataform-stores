@@ -1,0 +1,89 @@
+version: '3.2'
+
+services:
+    discoveryservice:
+        build:
+            context: PlataformaMicroServices/DiscoveryService/
+        ports:
+            - "8761:8761"
+        expose: 
+            - "8761"
+        networks:
+            - intra
+        
+    configservice:
+        build:
+            context: PlataformaMicroServices/ConfigService/
+        volumes: 
+            - ~/.ssh:/tmp/.ssh
+        ports:
+            - "8888:8888"
+        expose: 
+            - "8888"
+        networks:
+            - intra
+        links: 
+            - discoveryservice:discoveryservice
+        depends_on:
+        - discoveryservice
+        
+    routingservice:
+        build:
+            context: PlataformaMicroServices/RoutingService/
+        ports:
+            - "8762:8762"
+        expose: 
+            - "8762"
+        networks:
+            - intra
+        links: 
+            - discoveryservice:discoveryservice
+        depends_on:
+            - discoveryservice
+
+
+    customer:
+        build:
+            context: customer/
+        ports:
+            - "8081:8081"
+        expose: 
+            - "8081"
+        networks:
+            - intra
+        links: 
+            - discoveryservice:discoveryservice
+        depends_on:
+            - discoveryservice
+            
+    company:
+        build:
+            context: company/
+        ports:
+            - "8082:8082"
+        expose: 
+            - "8082"
+        networks:
+            - intra
+        links: 
+            - discoveryservice:discoveryservice
+        depends_on:
+            - discoveryservice
+    
+    product:
+        build:
+            context: product/
+        ports:
+            - "8083:8083"
+        expose: 
+            - "8083"
+        networks:
+            - intra
+        links: 
+            - discoveryservice:discoveryservice
+        depends_on:
+            - discoveryservice
+        
+networks:
+    intra:   
+        driver: bridge

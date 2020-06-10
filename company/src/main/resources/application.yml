@@ -1,5 +1,5 @@
 server:
-    port: 8080
+    port: 8082
     compression:
         enabled: true
 
@@ -17,29 +17,15 @@ spring:
         console:
             enabled: true
 
----
-spring:
-    profile: homolog
-    application:
-        name: company
-    datasource:
-        url: jdbc:h2:mem:testdb
-        driverClassName: org.h2.Driver
-        username: sa
-        password: password
-    jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-    h2:
-        console:
-            enabled: true
-#eureka:
-#    instance:
-#        preferIpAddress: true
-#    client:
-#        registerWithEureka: true
-#        fetchRegistry: true
-#        serviceUrl:
-#            defaultZone: ${EUREKA_URI:http://discoveryservice:8761/eureka}
+
+eureka:
+    instance:
+        preferIpAddress: true
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: ${EUREKA_URI:http://discoveryservice:8761/eureka}
 
 
 
