@@ -11,10 +11,13 @@ ELK_VERSION=7.6.2
 referencia das configurações https://github.com/deviantony/docker-elk
 
 popular logs para exemplo:
+
 # Using BSD netcat (Debian, Ubuntu, MacOS system, ...)
+
 $ cat /path/to/logfile.log | nc -q0 localhost 5000
 
 # Using GNU netcat (CentOS, Fedora, MacOS Homebrew, ...)
+
 $ cat /path/to/logfile.log | nc -c localhost 5000
 
 How to disable paid features

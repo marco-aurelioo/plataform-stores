@@ -41,7 +41,6 @@ services:
         depends_on:
             - discoveryservice
 
-
     customer:
         build:
             context: customer/

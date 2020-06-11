@@ -17,7 +17,7 @@ public class StoreEntity {
     private UUID id;
 
     @ManyToOne
-    private CompanyEntity companyEntity;
+    private CompanyEntity company;
     private String document;
     private String name;
 
@@ -29,12 +29,12 @@ public class StoreEntity {
         this.id = id;
     }
 
-    public CompanyEntity getCompanyEntity() {
-        return companyEntity;
+    public CompanyEntity getCompany() {
+        return company;
     }
 
-    public void setCompanyEntity(CompanyEntity companyEntity) {
-        this.companyEntity = companyEntity;
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
     }
 
     public String getDocument() {

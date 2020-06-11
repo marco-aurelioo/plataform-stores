@@ -51,7 +51,7 @@ public class StoreBusiness {
     public Store createStore(String companyuuid, Store store) {
         StoreEntity entity = fromPojo(store);
         CompanyEntity companyEntity = companyBusiness.findCompanyEntity(companyuuid);
-        entity.setCompanyEntity(companyEntity);
+        entity.setCompany(companyEntity);
         entity = storeCRUdRepository.save(entity);
         Store createdStore = fromEntity(entity);
         return createdStore;
